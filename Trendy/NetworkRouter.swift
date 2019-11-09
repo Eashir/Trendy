@@ -6,7 +6,6 @@
 //  Copyright © 2019 eashirarafat. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
 let authorizationKey = "AIzaSyDojb18z2TMWfVBcvhKa8cdfeumGXdahwM"
