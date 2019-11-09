@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9B33F9AE2DB62028C7039EA5 /* Pods_TrendyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56702166929615E870F1371C /* Pods_TrendyTests.framework */; };
+		CC439C6423764A5000D67F91 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6323764A5000D67F91 /* PushAnimator.swift */; };
+		CC439C6623764A5900D67F91 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6523764A5900D67F91 /* PopAnimator.swift */; };
+		CC439C6C23764E9200D67F91 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6B23764E9200D67F91 /* HomeViewController.swift */; };
 		CCDDF99123761004000D3444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF99023761004000D3444 /* AppDelegate.swift */; };
 		CCDDF99323761004000D3444 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF99223761004000D3444 /* ViewController.swift */; };
 		CCDDF99623761004000D3444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCDDF99423761004000D3444 /* Main.storyboard */; };
@@ -32,6 +35,9 @@
 		56702166929615E870F1371C /* Pods_TrendyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrendyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95CC68C99C4D84E9D23C989D /* Pods-TrendyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrendyTests.release.xcconfig"; path = "Target Support Files/Pods-TrendyTests/Pods-TrendyTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA02AB777F1642FD6710A848 /* Pods_Trendy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trendy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC439C6323764A5000D67F91 /* PushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
+		CC439C6523764A5900D67F91 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
+		CC439C6B23764E9200D67F91 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CCDDF98D23761004000D3444 /* Trendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCDDF99023761004000D3444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCDDF99223761004000D3444 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +82,6 @@
 				E9A38244B616DC41770B6417 /* Pods-TrendyTests.debug.xcconfig */,
 				95CC68C99C4D84E9D23C989D /* Pods-TrendyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -106,6 +111,9 @@
 				CCDDF99023761004000D3444 /* AppDelegate.swift */,
 				CCDDF99223761004000D3444 /* ViewController.swift */,
 				CCDDF9B02376105A000D3444 /* NetworkRouter.swift */,
+				CC439C6323764A5000D67F91 /* PushAnimator.swift */,
+				CC439C6523764A5900D67F91 /* PopAnimator.swift */,
+				CC439C6B23764E9200D67F91 /* HomeViewController.swift */,
 				CCDDF99423761004000D3444 /* Main.storyboard */,
 				CCDDF99723761005000D3444 /* Assets.xcassets */,
 				CCDDF99923761005000D3444 /* LaunchScreen.storyboard */,
@@ -300,9 +308,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC439C6623764A5900D67F91 /* PopAnimator.swift in Sources */,
 				CCDDF99323761004000D3444 /* ViewController.swift in Sources */,
 				CCDDF99123761004000D3444 /* AppDelegate.swift in Sources */,
 				CCDDF9B12376105A000D3444 /* NetworkRouter.swift in Sources */,
+				CC439C6423764A5000D67F91 /* PushAnimator.swift in Sources */,
+				CC439C6C23764E9200D67F91 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
