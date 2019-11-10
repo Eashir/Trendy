@@ -13,21 +13,19 @@ let authorizationKey = "AIzaSyDojb18z2TMWfVBcvhKa8cdfeumGXdahwM"
 public enum NetworkRouter: URLRequestConvertible {
 	
 	static let baseURLPath = "https://www.googleapis.com/youtube/v3"
-	static let authToken = "Basic \(authorizationKey)"
 	
-	case videos(String)
-	case duration
+	case videos
 	
 	var method: HTTPMethod {
 		switch self {
-		case .videos, .duration:
+		case .videos:
 			return .get
 		}
 	}
 	
 	var path: String {
 		switch self {
-		case .videos, .duration:
+		case .videos:
 			return "/videos"
 		}
 	}
@@ -37,15 +35,7 @@ public enum NetworkRouter: URLRequestConvertible {
 		case .videos:
 			return
 				[
-					"path": "snippet",
-					"key": "\(authorizationKey)",
-					"chart": "mostPopular"
-				]
-			
-		case .duration:
-			return
-				[
-					"path": "contentDetails",
+					"part": "snippet, contentDetails",
 					"key": "\(authorizationKey)",
 					"chart": "mostPopular"
 				]
@@ -57,7 +47,6 @@ public enum NetworkRouter: URLRequestConvertible {
 		var request = URLRequest(url: url.appendingPathComponent(path))
 		
 		request.httpMethod = method.rawValue
-		request.setValue(NetworkRouter.authToken, forHTTPHeaderField: "Authorization")
 		request.timeoutInterval = TimeInterval(10 * 1000)
 		
 		return try URLEncoding.default.encode(request, with: parameters)
