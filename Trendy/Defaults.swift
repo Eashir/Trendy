@@ -13,18 +13,16 @@ struct Defaults {
 	static let userDefaults = UserDefaults.standard
 	
 	static func save(_ id: String) {
-		userDefaults.set("", forKey: id)
+		userDefaults.set("like", forKey: id)
 	}
 	
 	static func remove(_ id: String) {
 		userDefaults.removeObject(forKey: id)
 	}
 	
-	static func checkIfKeyExists(_ id: String) -> Bool {
-		guard userDefaults.value(forKey: id) != nil else {
-			return false
-		}
-		return true
+	static func exists(key: String) -> Bool {
+		return UserDefaults.standard.object(forKey: key) != nil
 	}
+
 	
 }

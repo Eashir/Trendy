@@ -11,8 +11,9 @@
 		CC439C6423764A5000D67F91 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6323764A5000D67F91 /* PushAnimator.swift */; };
 		CC439C6623764A5900D67F91 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6523764A5900D67F91 /* PopAnimator.swift */; };
 		CC439C6C23764E9200D67F91 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6B23764E9200D67F91 /* HomeViewController.swift */; };
+		CC74E2CD2377BBF80088DF16 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74E2CC2377BBF80088DF16 /* VideoTableViewCell.swift */; };
+		CC74E2CF2377BDF10088DF16 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74E2CE2377BDF10088DF16 /* VideoDetailViewController.swift */; };
 		CCDDF99123761004000D3444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF99023761004000D3444 /* AppDelegate.swift */; };
-		CCDDF99323761004000D3444 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF99223761004000D3444 /* ViewController.swift */; };
 		CCDDF99623761004000D3444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCDDF99423761004000D3444 /* Main.storyboard */; };
 		CCDDF99823761005000D3444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCDDF99723761005000D3444 /* Assets.xcassets */; };
 		CCDDF99B23761005000D3444 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCDDF99923761005000D3444 /* LaunchScreen.storyboard */; };
@@ -21,6 +22,7 @@
 		CCDE576C23772F0B00649D48 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE576B23772F0B00649D48 /* Video.swift */; };
 		CCDE576E2377326500649D48 /* VideoLikeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE576D2377326500649D48 /* VideoLikeDelegate.swift */; };
 		CCDE5772237742E200649D48 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE5771237742E200649D48 /* Defaults.swift */; };
+		CCDE5778237755DA00649D48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE5777237755DA00649D48 /* HomeViewModel.swift */; };
 		D2A5A5A94C5613BC1A73D9B1 /* Pods_Trendy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA02AB777F1642FD6710A848 /* Pods_Trendy.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,9 +43,10 @@
 		CC439C6323764A5000D67F91 /* PushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
 		CC439C6523764A5900D67F91 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		CC439C6B23764E9200D67F91 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		CC74E2CC2377BBF80088DF16 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		CC74E2CE2377BDF10088DF16 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
 		CCDDF98D23761004000D3444 /* Trendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCDDF99023761004000D3444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CCDDF99223761004000D3444 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CCDDF99523761004000D3444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCDDF99723761005000D3444 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCDDF99A23761005000D3444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		CCDE576B23772F0B00649D48 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		CCDE576D2377326500649D48 /* VideoLikeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeDelegate.swift; sourceTree = "<group>"; };
 		CCDE5771237742E200649D48 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		CCDE5777237755DA00649D48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = ../HomeViewModel.swift; sourceTree = "<group>"; };
 		D17626640E1662A00EA2406E /* Pods-Trendy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trendy.release.xcconfig"; path = "Target Support Files/Pods-Trendy/Pods-Trendy.release.xcconfig"; sourceTree = "<group>"; };
 		E65AC51D39DED046C0BFF8C5 /* Pods-Trendy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trendy.debug.xcconfig"; path = "Target Support Files/Pods-Trendy/Pods-Trendy.debug.xcconfig"; sourceTree = "<group>"; };
 		E9A38244B616DC41770B6417 /* Pods-TrendyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrendyTests.debug.xcconfig"; path = "Target Support Files/Pods-TrendyTests/Pods-TrendyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +95,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CCD3A06D23779ECF00E93009 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CCDE5777237755DA00649D48 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		CCDDF98423761004000D3444 = {
 			isa = PBXGroup;
 			children = (
@@ -114,15 +126,16 @@
 		CCDDF98F23761004000D3444 /* Trendy */ = {
 			isa = PBXGroup;
 			children = (
-				CCDE577323774A5A00649D48 /* Resources */,
+				CCDE577423774A9400649D48 /* Model */,
+				CCD3A06D23779ECF00E93009 /* ViewModel */,
+				CCDE577623774BB200649D48 /* View */,
 				CCDE577523774AB800649D48 /* Controller */,
+				CCDE577323774A5A00649D48 /* Resources */,
 				CCDDF9B02376105A000D3444 /* NetworkRouter.swift */,
 				CCDE5771237742E200649D48 /* Defaults.swift */,
 				CCDE576D2377326500649D48 /* VideoLikeDelegate.swift */,
-				CCDE577423774A9400649D48 /* Model */,
 				CC439C6323764A5000D67F91 /* PushAnimator.swift */,
 				CC439C6523764A5900D67F91 /* PopAnimator.swift */,
-				CCDE577623774BB200649D48 /* View */,
 			);
 			path = Trendy;
 			sourceTree = "<group>";
@@ -157,8 +170,8 @@
 		CCDE577523774AB800649D48 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CCDDF99223761004000D3444 /* ViewController.swift */,
 				CC439C6B23764E9200D67F91 /* HomeViewController.swift */,
+				CC74E2CE2377BDF10088DF16 /* VideoDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -167,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				CCDDF99423761004000D3444 /* Main.storyboard */,
+				CC74E2CC2377BBF80088DF16 /* VideoTableViewCell.swift */,
 				CCDDF99923761005000D3444 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -211,6 +225,7 @@
 				CCDDF99D23761005000D3444 /* Sources */,
 				CCDDF99E23761005000D3444 /* Frameworks */,
 				CCDDF99F23761005000D3444 /* Resources */,
+				17747E28EB0CB615847D9031 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -281,6 +296,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		17747E28EB0CB615847D9031 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TrendyTests/Pods-TrendyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TrendyTests/Pods-TrendyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TrendyTests/Pods-TrendyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		828D02E0CEE5A4ADFF6E307C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,13 +383,15 @@
 			files = (
 				CC439C6623764A5900D67F91 /* PopAnimator.swift in Sources */,
 				CCDE576E2377326500649D48 /* VideoLikeDelegate.swift in Sources */,
-				CCDDF99323761004000D3444 /* ViewController.swift in Sources */,
+				CCDE5778237755DA00649D48 /* HomeViewModel.swift in Sources */,
 				CCDDF99123761004000D3444 /* AppDelegate.swift in Sources */,
 				CCDDF9B12376105A000D3444 /* NetworkRouter.swift in Sources */,
 				CC439C6423764A5000D67F91 /* PushAnimator.swift in Sources */,
 				CCDE5772237742E200649D48 /* Defaults.swift in Sources */,
 				CCDE576C23772F0B00649D48 /* Video.swift in Sources */,
 				CC439C6C23764E9200D67F91 /* HomeViewController.swift in Sources */,
+				CC74E2CD2377BBF80088DF16 /* VideoTableViewCell.swift in Sources */,
+				CC74E2CF2377BDF10088DF16 /* VideoDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88EN34P563;
-				INFOPLIST_FILE = Trendy/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Trendy/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,7 +575,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88EN34P563;
-				INFOPLIST_FILE = Trendy/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Trendy/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

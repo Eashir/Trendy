@@ -50,22 +50,19 @@ class Video: Decodable {
 		thumbnailURL = try defaul.decode(URL.self, forKey: .thumbnailURL)
 	}
 	
-	class func getAllTrendingVideos( completion: @escaping ([Video] ) -> Void) {
+	class func getAllTrendingVideos( completion: @escaping ([Video]? ) -> Void) {
 		
 		Alamofire.request(NetworkRouter.videos).responseData { (response) in
-			
 			do {
 				let decoder = JSONDecoder()
-				let video = try decoder.decode(ListResponse.self, from: response.result.value!) //Decode JSON Response Data
+				let video = try decoder.decode(ListResponse.self, from: response.result.value!)
 				
-				print(video)
 				completion(video.items)
 			} catch let parsingError {
 				print("Error", parsingError)
 			}
-
 		}
+		
 	}
 	
-
 }

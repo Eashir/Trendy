@@ -10,26 +10,31 @@ import UIKit
 
 protocol VideoLikeDelegate: class {
 	
-	func videoLiked(success: Bool)
+	func newVideoLiked(success: Bool)
 	func removedLike(success: Bool)
 	
 }
 
-extension VideoLikeDelegate where Self: UIViewController {
+extension VideoLikeDelegate {
 	
-	internal func likeVideo(_ videoID: String) {
-		let isAlreadyLiked = Defaults.checkIfKeyExists(videoID)
+	internal func likeVideo(videoID: String) {
+		let isAlreadyLiked = Defaults.exists(key: videoID)
 		switch isAlreadyLiked {
 		case true:
 			removeLikedVideo(videoID)
 		case false:
-			Defaults.save(videoID)
+			likeNewVideo(videoID)
 		}
-		
 	}
 	
 	internal func removeLikedVideo(_ videoID: String) {
 		Defaults.remove(videoID)
+		removedLike(success: true)
+	}
+	
+	internal func likeNewVideo(_ videoID: String) {
+		Defaults.save(videoID)
+		newVideoLiked(success: true)
 	}
 	
 }
