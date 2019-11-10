@@ -10,12 +10,19 @@ import UIKit
 
 class HomeViewController: UIViewController {
 	
+	private var homeViewModel: HomeViewModel?
+	@IBOutlet weak var tableView: UITableView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(false)
+		homeViewModel = HomeViewModel(tableView: tableView, navigationController: self.navigationController!)
+	}
+	
 }
-
 
 // MARK: - UINavigationControllerDelegate
 
