@@ -24,10 +24,10 @@ class HomeViewModel: NSObject {
 		tableView.delegate = self
 		tableView.dataSource = self
 		
-		getAllTrendingVideos()
+		getVideos()
 	}
 	
-	func getAllTrendingVideos() {
+	func getVideos() {
 		Video.getAllTrendingVideos { [weak self] videos in
 			guard let validVideos = videos else {return}
 			guard let validSelf = self else {return}
@@ -40,6 +40,8 @@ class HomeViewModel: NSObject {
 	}
 	
 }
+
+// MARK: - UITableViewDataSource & UITableViewDelegate
 
 extension HomeViewModel: UITableViewDataSource, UITableViewDelegate {
 
@@ -68,8 +70,8 @@ extension HomeViewModel: UITableViewDataSource, UITableViewDelegate {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let videoVC = storyboard.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
 		let videoLauncher = VideoLauncher(view: videoVC.view, playerView: VideoPlayerView(videos: videos, frame: videoPlayerFrame))
-		self.navigationController.pushViewController(videoVC, animated: true)
 		videoLauncher.showVideoPlayer()
+		self.navigationController.pushViewController(videoVC, animated: true)
 	}
 	
 }

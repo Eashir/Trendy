@@ -12,6 +12,7 @@ let authorizationKey = "AIzaSyDojb18z2TMWfVBcvhKa8cdfeumGXdahwM"
 
 public enum NetworkRouter: URLRequestConvertible {
 	
+	//Opted for single networking class to handle multiple GET, POST, PATCH for data retrieval + a real like system
 	static let baseURLPath = "https://www.googleapis.com/youtube/v3"
 	
 	case videos

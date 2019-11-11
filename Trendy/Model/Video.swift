@@ -9,11 +9,9 @@
 import UIKit
 import Alamofire
 
+// Decodable for simple native, deeply-nested JSON parsing
+
 struct ListResponse: Decodable {
-	let kind: String
-	let etag: String
-	let nextPageToken: String
-	
 	let items: [Video]
 }
 
@@ -30,7 +28,7 @@ class Video: Decodable {
 		case id = "id"
 		case snippet = "snippet"
 		case thumbnails = "thumbnails"
-		case defaul = "default"
+		case high = "high"
 		case title = "title"
 		case thumbnailURL = "url"
 		case contentDetails = "contentDetails"
@@ -40,18 +38,17 @@ class Video: Decodable {
 	required init(from decoder: Decoder) throws {
 		let itemDict = try decoder.container(keyedBy: CodingKeys.self)
 		id = try itemDict.decode(String.self, forKey: .id)
-		url = "https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8"
+		url = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
 		let contentDetails = try itemDict.nestedContainer(keyedBy: CodingKeys.self, forKey: .contentDetails)
 		duration = try contentDetails.decode(String.self, forKey: .duration)
 		let snippet = try itemDict.nestedContainer(keyedBy: CodingKeys.self, forKey: .snippet)
 		title = try snippet.decode(String.self, forKey: .title)
 		let thumbnails = try snippet.nestedContainer(keyedBy: CodingKeys.self, forKey: .thumbnails)
-		let defaul = try thumbnails.nestedContainer(keyedBy: CodingKeys.self, forKey: .defaul)
-		thumbnailURL = try defaul.decode(URL.self, forKey: .thumbnailURL)
+		let high = try thumbnails.nestedContainer(keyedBy: CodingKeys.self, forKey: .high)
+		thumbnailURL = try high.decode(URL.self, forKey: .thumbnailURL)
 	}
 	
 	class func getAllTrendingVideos( completion: @escaping ([Video]? ) -> Void) {
-		
 		Alamofire.request(NetworkRouter.videos).responseData { (response) in
 			do {
 				let decoder = JSONDecoder()
@@ -61,7 +58,6 @@ class Video: Decodable {
 				print("Error", parsingError)
 			}
 		}
-		
 	}
 	
 }

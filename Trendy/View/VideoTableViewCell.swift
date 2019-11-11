@@ -22,7 +22,7 @@ class VideoTableViewCell: UITableViewCell {
 	
 	@IBAction func likeButtonPressed(_ sender: UIButton) {
 		guard let video = currentVideo else {return}
-		videoLikeDelegate?.likeVideo(videoID: video.id)
+		self.videoLikeDelegate?.likeVideo(videoID: video.id)
 	}
 	
 	override func awakeFromNib() {
@@ -69,7 +69,7 @@ extension VideoTableViewCell {
 		
 		//SDWebImage to handle efficient, speedy image load+caching
 		thumbnailImageView.sd_setImage(with: validVideo.thumbnailURL)
-
+		
 		let isAlreadyLiked = Defaults.exists(key: validVideo.id)
 		switch isAlreadyLiked {
 		case true:

@@ -21,6 +21,10 @@ class VideoPlayerView: UIView {
 		setupViews()
 	}
 	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 	// MARK: - Properties
 	
 	var player: AVPlayer?
@@ -28,6 +32,7 @@ class VideoPlayerView: UIView {
 	var currentTrack = 0
 	var videos: [Video]
 	var isPlaying = false
+	let ConcurrentQueue = DispatchQueue(label: "concurrentQueue", attributes: .concurrent)
 	
 	lazy var pausePlayButton: UIButton = {
 		let button = UIButton(type: .system)
@@ -142,7 +147,10 @@ class VideoPlayerView: UIView {
 				videoLengthLabel.text = "\(minutesText):\(secondsText)"
 			}
 		}
+		
 	}
+	
+	//Index-based looping playlist system using currentTrack: Int var
 	
 	func playTrack() {
 		if playerItems.count > 0 {
@@ -196,7 +204,6 @@ class VideoPlayerView: UIView {
 	// MARK - Gestures
 	
 	func addGestureRecognizers() {
-		
 		let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.playNextTrack))
 		swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
 		addGestureRecognizer(swipeLeft)
@@ -208,9 +215,6 @@ class VideoPlayerView: UIView {
 		addGestureRecognizer(swipeRight)
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
 }
 
 class VideoLauncher: NSObject {
