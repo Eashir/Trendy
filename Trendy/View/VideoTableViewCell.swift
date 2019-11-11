@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 class VideoTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var likeButton: UIButton!
+	@IBOutlet weak var thumbnailImageView: UIImageView!
 	
 	var currentVideo: Video?
 	weak private var videoLikeDelegate: VideoLikeDelegate?
@@ -33,7 +35,6 @@ class VideoTableViewCell: UITableViewCell {
 	
 	func setupCell(video: Video) {
 		currentVideo = video
-		
 		titleLabel.text = video.title
 	}
 	
@@ -58,7 +59,9 @@ extension VideoTableViewCell: VideoLikeDelegate {
 extension VideoTableViewCell {
 	
 	func setupCellLayersAndImage() {
+		
 		guard let validVideo = currentVideo else {return}
+		thumbnailImageView.sd_setImage(with: validVideo.thumbnailURL)
 
 		let isAlreadyLiked = Defaults.exists(key: validVideo.id)
 		switch isAlreadyLiked {

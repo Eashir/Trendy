@@ -27,13 +27,13 @@ class HomeViewModel: NSObject {
 	}
 	
 	func getAllTrendingVideos() {
-		Video.getAllTrendingVideos { videos in
-			guard let validVideos = videos else {
-				return
-			}
-			self.videos = validVideos
+		Video.getAllTrendingVideos { [weak self] videos in
+			guard let validVideos = videos else {return}
+			guard let validSelf = self else {return}
+			
+			validSelf.videos = validVideos
 			DispatchQueue.main.async {
-				self.tableView.reloadData()
+				validSelf.tableView.reloadData()
 			}
 		}
 	}

@@ -13,6 +13,9 @@
 		CC439C6C23764E9200D67F91 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC439C6B23764E9200D67F91 /* HomeViewController.swift */; };
 		CC74E2CD2377BBF80088DF16 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74E2CC2377BBF80088DF16 /* VideoTableViewCell.swift */; };
 		CC74E2CF2377BDF10088DF16 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74E2CE2377BDF10088DF16 /* VideoDetailViewController.swift */; };
+		CC90ACBB2378EC04002B2035 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90ACBA2378EC04002B2035 /* VideoPlayerView.swift */; };
+		CC90ACBD2378EC84002B2035 /* VideoPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90ACBC2378EC84002B2035 /* VideoPlaylistView.swift */; };
+		CC90ACBF2378F868002B2035 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90ACBE2378F868002B2035 /* VideoViewController.swift */; };
 		CCDDF99123761004000D3444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDF99023761004000D3444 /* AppDelegate.swift */; };
 		CCDDF99623761004000D3444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCDDF99423761004000D3444 /* Main.storyboard */; };
 		CCDDF99823761005000D3444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCDDF99723761005000D3444 /* Assets.xcassets */; };
@@ -45,6 +48,9 @@
 		CC439C6B23764E9200D67F91 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CC74E2CC2377BBF80088DF16 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		CC74E2CE2377BDF10088DF16 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		CC90ACBA2378EC04002B2035 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		CC90ACBC2378EC84002B2035 /* VideoPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaylistView.swift; sourceTree = "<group>"; };
+		CC90ACBE2378F868002B2035 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		CCDDF98D23761004000D3444 /* Trendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCDDF99023761004000D3444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCDDF99523761004000D3444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -179,8 +185,11 @@
 		CCDE577623774BB200649D48 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CCDDF99423761004000D3444 /* Main.storyboard */,
 				CC74E2CC2377BBF80088DF16 /* VideoTableViewCell.swift */,
+				CC90ACBA2378EC04002B2035 /* VideoPlayerView.swift */,
+				CC90ACBE2378F868002B2035 /* VideoViewController.swift */,
+				CC90ACBC2378EC84002B2035 /* VideoPlaylistView.swift */,
+				CCDDF99423761004000D3444 /* Main.storyboard */,
 				CCDDF99923761005000D3444 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -389,9 +398,12 @@
 				CC439C6423764A5000D67F91 /* PushAnimator.swift in Sources */,
 				CCDE5772237742E200649D48 /* Defaults.swift in Sources */,
 				CCDE576C23772F0B00649D48 /* Video.swift in Sources */,
+				CC90ACBF2378F868002B2035 /* VideoViewController.swift in Sources */,
 				CC439C6C23764E9200D67F91 /* HomeViewController.swift in Sources */,
 				CC74E2CD2377BBF80088DF16 /* VideoTableViewCell.swift in Sources */,
 				CC74E2CF2377BDF10088DF16 /* VideoDetailViewController.swift in Sources */,
+				CC90ACBD2378EC84002B2035 /* VideoPlaylistView.swift in Sources */,
+				CC90ACBB2378EC04002B2035 /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +569,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88EN34P563;
 				INFOPLIST_FILE = "$(SRCROOT)/Trendy/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -576,6 +589,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88EN34P563;
 				INFOPLIST_FILE = "$(SRCROOT)/Trendy/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

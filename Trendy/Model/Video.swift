@@ -40,7 +40,7 @@ class Video: Decodable {
 	required init(from decoder: Decoder) throws {
 		let itemDict = try decoder.container(keyedBy: CodingKeys.self)
 		id = try itemDict.decode(String.self, forKey: .id)
-		url = "youtube.com//watch?v=\(id)"
+		url = "https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8"
 		let contentDetails = try itemDict.nestedContainer(keyedBy: CodingKeys.self, forKey: .contentDetails)
 		duration = try contentDetails.decode(String.self, forKey: .duration)
 		let snippet = try itemDict.nestedContainer(keyedBy: CodingKeys.self, forKey: .snippet)
@@ -56,7 +56,6 @@ class Video: Decodable {
 			do {
 				let decoder = JSONDecoder()
 				let video = try decoder.decode(ListResponse.self, from: response.result.value!)
-				
 				completion(video.items)
 			} catch let parsingError {
 				print("Error", parsingError)
