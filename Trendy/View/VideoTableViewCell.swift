@@ -39,7 +39,7 @@ class VideoTableViewCell: UITableViewCell {
 		currentVideo = video
 		titleLabel.text = video.title
 		
-		guard let validDurationStr = video.duration.getStrFromIso8061() else {return}
+		guard let validDurationStr = video.duration.getDurationStrFromIso8601() else {return}
 		durationLabel.text = validDurationStr
 	}
 	

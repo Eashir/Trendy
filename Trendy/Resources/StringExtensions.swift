@@ -10,15 +10,28 @@ import Foundation
 
 extension String {
 	
-	func getStrFromIso8061() -> String? {
-		let dateFormatter = DateFormatter()
-		let enUSPosixLocale = Locale(identifier: "en_US_POSIX")
-		dateFormatter.locale = enUSPosixLocale
-		dateFormatter.dateFormat = "HH:mm:ss"
-		dateFormatter.calendar = Calendar(identifier: .gregorian)
+	func getDurationStrFromIso8601() -> String? {
+		var minutes: Int = 0
+		var seconds: Int = 0
+	
+			var lastIndex = self.startIndex
+			
+			if let indexT = self.firstIndex(of: "T") {
+				lastIndex = self.index(after: indexT)
+				
+				if let indexM = self.firstIndex(of: "M") {
+					let min = String(self[lastIndex..<indexM])
+					minutes = Int(min) ?? 0
+					lastIndex = self.index(after: indexM)
+				}
+				
+				if let indexS = self.firstIndex(of: "S") {
+					let sec = String(self[lastIndex..<indexS])
+					seconds = Int(sec) ?? 0
+				}
+			}
 		
-		let iso8601String = dateFormatter.string(from: Date())
-		return iso8601String
+		return String(format: "%02d:%02d", minutes, seconds)
 	}
 	
 }

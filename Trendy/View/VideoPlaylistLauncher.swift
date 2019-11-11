@@ -11,12 +11,23 @@ import AVFoundation
 
 class VideoPlayerView: UIView {
 	
-	let activityIndicatorView: UIActivityIndicatorView = {
-		let aiv = UIActivityIndicatorView(style: .whiteLarge)
-		aiv.translatesAutoresizingMaskIntoConstraints = false
-		aiv.startAnimating()
-		return aiv
-	}()
+	init(videos: [Video], frame: CGRect) {
+		self.videos = videos
+		super.init(frame: frame)
+		
+		setupGradientLayer()
+		
+		setupPlayerView()
+		setupViews()
+	}
+	
+	// MARK: - Properties
+	
+	var player: AVPlayer?
+	var playerItems = [AVPlayerItem]()
+	var currentTrack = 0
+	var videos: [Video]
+	var isPlaying = false
 	
 	lazy var pausePlayButton: UIButton = {
 		let button = UIButton(type: .system)
@@ -54,22 +65,6 @@ class VideoPlayerView: UIView {
 		return view
 	}()
 	
-	init(videos: [Video], frame: CGRect) {
-		self.videos = videos
-		super.init(frame: frame)
-		
-		setupGradientLayer()
-		
-		setupPlayerView()
-		setupViews()
-	}
-	
-	var player: AVPlayer?
-	var playerItems = [AVPlayerItem]()
-	var currentTrack = 0
-	var videos: [Video]
-	var isPlaying = false
-	
 	// MARK: - Setup
 	
 	private func setupPlayerView() {
@@ -88,11 +83,7 @@ class VideoPlayerView: UIView {
 	func setupViews() {
 		controlsContainerView.frame = frame
 		addSubview(controlsContainerView)
-		
-		controlsContainerView.addSubview(activityIndicatorView)
-		activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-		activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-		
+	
 		controlsContainerView.addSubview(pausePlayButton)
 		pausePlayButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 		pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -137,9 +128,8 @@ class VideoPlayerView: UIView {
 	}
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-		//this is when the player is ready and rendering frames
+	
 		if keyPath == "currentItem.loadedTimeRanges" {
-			activityIndicatorView.stopAnimating()
 			controlsContainerView.backgroundColor = .clear
 			pausePlayButton.isHidden = false
 			isPlaying = true
@@ -150,7 +140,6 @@ class VideoPlayerView: UIView {
 				let secondsText = Int(seconds) % 60
 				let minutesText = String(format: "%02d", Int(seconds) / 60)
 				videoLengthLabel.text = "\(minutesText):\(secondsText)"
-				
 			}
 		}
 	}
