@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.navigationController?.delegate = self
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

@@ -12,10 +12,9 @@ import XCTest
 class TrendyTests: XCTestCase {
 	
 		var videoPlaylist: VideoPlaylistView?
-		var allVideos: [Video]?
 	
     override func setUp() {
-			videoPlaylist = VideoPlaylistView(videos: allVideos!)
+			videoPlaylist = VideoPlaylistView(videos: [Video]())
     }
 
     override func tearDown() {

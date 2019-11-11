@@ -12,6 +12,7 @@ class HomeViewModel: NSObject {
 	
 	var videos = [Video]()
 	let VideoCellReuseIdentifier = "VideoCell"
+	let videoPlayerFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 	private var tableView: UITableView
 	private var navigationController: UINavigationController
 	
@@ -64,11 +65,11 @@ extension HomeViewModel: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let video = videos[indexPath.row]
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let videoDetailVC = storyboard.instantiateViewController(withIdentifier: "videoDetailVC") as! VideoDetailViewController
-		videoDetailVC.video = video
-		self.navigationController.pushViewController(videoDetailVC, animated: true)
+		let videoVC = storyboard.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
+		let videoLauncher = VideoLauncher(view: videoVC.view, playerView: VideoPlayerView(videos: videos, frame: videoPlayerFrame))
+		self.navigationController.pushViewController(videoVC, animated: true)
+		videoLauncher.showVideoPlayer()
 	}
 	
 }

@@ -12,10 +12,12 @@ import SDWebImage
 class VideoTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var durationLabel: UILabel!
 	@IBOutlet weak var likeButton: UIButton!
 	@IBOutlet weak var thumbnailImageView: UIImageView!
 	
 	var currentVideo: Video?
+	
 	weak private var videoLikeDelegate: VideoLikeDelegate?
 	
 	@IBAction func likeButtonPressed(_ sender: UIButton) {
@@ -36,6 +38,9 @@ class VideoTableViewCell: UITableViewCell {
 	func setupCell(video: Video) {
 		currentVideo = video
 		titleLabel.text = video.title
+		
+		guard let validDurationStr = video.duration.getStrFromIso8061() else {return}
+		durationLabel.text = validDurationStr
 	}
 	
 }
@@ -61,6 +66,8 @@ extension VideoTableViewCell {
 	func setupCellLayersAndImage() {
 		
 		guard let validVideo = currentVideo else {return}
+		
+		//SDWebImage to handle efficient, speedy image load+caching
 		thumbnailImageView.sd_setImage(with: validVideo.thumbnailURL)
 
 		let isAlreadyLiked = Defaults.exists(key: validVideo.id)
