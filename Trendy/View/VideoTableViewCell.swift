@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 import AVKit
 import SDWebImage
-import WebKit
 
 class VideoTableViewCell: UITableViewCell {
 	
@@ -20,7 +19,6 @@ class VideoTableViewCell: UITableViewCell {
 	@IBOutlet weak var thumbnailImageView: UIImageView!
 	
 	var currentVideo: Video?
-	var videos: [Video]?
 	var videoPlayerView: VideoPlayerView?
 	var tableSuperView: UIView?
 	let fullscreenFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -34,6 +32,7 @@ class VideoTableViewCell: UITableViewCell {
 	
 	override func prepareForReuse() {
 		currentVideo = nil
+		videoPlayerView = nil 
 	}
 	
 	override func awakeFromNib() {
@@ -55,44 +54,29 @@ class VideoTableViewCell: UITableViewCell {
 		
 		let frame = thumbnailImageView.layer.frame
 		videoPlayerView = VideoPlayerView(videos: [video], frame: frame)
-		let videoLauncher = VideoLauncher(view: self.contentView, playerView: videoPlayerView!)
-		videoPlayerView!.player?.isMuted = true
-		videoPlayerView!.pausePlayButton.isHidden = true
-		videoPlayerView!.currentTimeLabel.isHidden = true
-		videoPlayerView!.videoLengthLabel.isHidden = true
-		videoPlayerView!.cancelButton.isHidden = true
+		let videoLauncher = VideoLauncher(view: self.thumbnailImageView , playerView: videoPlayerView!)
+		videoPlayerView!.hideUIForCell()
 		videoLauncher.showVideoPlayer()
 		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.cellTapped))
 		self.addGestureRecognizer(tapGestureRecognizer)
-		
-//		let webView = WKWebView(frame: frame)
-//
-//		webView.load(URLRequest(url: URL(string: "https://www.youtube.com/embed/\(video.id)")!))
-//		self.contentView.addSubview(webView)
 	}
 	
 	@objc func cellTapped() {
 		self.contentView.layoutIfNeeded()
-
-		videoPlayerView?.videos = videos!
-		//Take the index
-		/*
-		If i have all videos, ready a player with all videos 
-		*/
-		videoPlayerView?.frame = fullscreenFrame
-		videoPlayerView?.playerLayer!.frame = fullscreenFrame
-//
-//		UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-//			self.contentView.layoutIfNeeded()
-//		})
-		let videoLauncher = VideoLauncher(
-																			view: tableSuperView!,
-																			playerView: videoPlayerView!
-																		)
+		guard let validPlayerView = videoPlayerView else {return}
+		validPlayerView.frame = fullscreenFrame
+		if let validPlayerLayer = validPlayerView.playerLayer {
+			validPlayerLayer.frame = fullscreenFrame
+		}
+		
+		
+		UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+			self.contentView.layoutIfNeeded()
+		})
+		let videoLauncher = VideoLauncher(view: tableSuperView!, playerView: validPlayerView)
 		videoLauncher.playerView.cancelButton.isHidden = false
 		videoLauncher.showVideoPlayer()
-		
-		
+		validPlayerView.playTrack()
 	}
 	
 	

@@ -33,7 +33,6 @@ class VideoPlayerView: UIView {
 	var currentTrack = 0
 	var videos: [Video]
 	var isPlaying = false
-	let ConcurrentQueue = DispatchQueue(label: "concurrentQueue", attributes: .concurrent)
 	
 	lazy var pausePlayButton: UIButton = {
 		let button = UIButton(type: .system)
@@ -52,7 +51,6 @@ class VideoPlayerView: UIView {
 		button.setImage(image, for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.tintColor = .white
-//		button.isHidden = true
 		button.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
 		return button
 	}()
@@ -138,27 +136,28 @@ class VideoPlayerView: UIView {
 		if let url = URL(string: videos[0].url) {
 			player = AVPlayer(url: url)
 			let asset = AVURLAsset(url: url)
-			let item = AVPlayerItem(asset: asset)
-			playerItems.append(item)
-			playerLayer = AVPlayerLayer(player: player)
-			self.layer.addSublayer(playerLayer!)
-			playerLayer!.frame = self.frame
-			player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-			player?.play()
+			loadPropertyValues(forAsset: asset)
 		}
 		
 		//Add rest of the videos
-		if videos.count > 1 {
-			for i in 1...videos.count - 1 {
-				guard let validURL = URL(string: videos[i].url) else {
-					continue
-				}
-				let asset = AVURLAsset(url: validURL)
-				let item = AVPlayerItem(asset: asset)
-				playerItems.append(item)
-			}
-
-		}
+//		if videos.count > 1 {
+//			for i in 1...videos.count - 1 {
+//				guard let validURL = URL(string: videos[i].url) else {
+//					continue
+//				}
+//				let asset = AVURLAsset(url: validURL)
+//				loadPropertyValues(forAsset: asset)
+//			}
+//
+//		}
+	}
+	
+	func hideUIForCell() {
+		self.player?.isMuted = true
+		self.pausePlayButton.isHidden = true
+		self.currentTimeLabel.isHidden = true
+		self.videoLengthLabel.isHidden = true
+		self.cancelButton.isHidden = true
 	}
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -179,8 +178,70 @@ class VideoPlayerView: UIView {
 		
 	}
 	
-	//Index-based looping playlist system using currentTrack: Int var
+	// MARK: - Asset Property Handling
 	
+	func loadPropertyValues(forAsset newAsset: AVURLAsset) {
+		
+		let assetKeysRequiredToPlay = [
+			"playable",
+			"hasProtectedContent"
+		]
+		
+		newAsset.loadValuesAsynchronously(forKeys: assetKeysRequiredToPlay) {
+			DispatchQueue.main.async { 
+				if self.validateValues(forKeys: assetKeysRequiredToPlay, forAsset: newAsset) {
+					let item = AVPlayerItem(asset: newAsset)
+					self.playerItems.append(item)
+					self.playerLayer = AVPlayerLayer(player: self.player)
+					self.layer.addSublayer(self.playerLayer!)
+					self.playerLayer!.frame = self.frame
+					self.playTrack()
+				}
+			}
+		}
+		
+	}
+	
+	func validateValues(forKeys keys: [String], forAsset newAsset: AVAsset) -> Bool {
+		for key in keys {
+			var error: NSError?
+			if newAsset.statusOfValue(forKey: key, error: &error) == .failed {
+				let stringFormat = NSLocalizedString("The media failed to load the key \"%@\"",
+																						 comment: "You can't use this AVAsset because one of it's keys failed to load.")
+				
+				let message = String.localizedStringWithFormat(stringFormat, key)
+				self.handleErrorWithMessage(message, error: error)
+				
+				return false
+			}
+		}
+		
+		if !newAsset.isPlayable || newAsset.hasProtectedContent {
+			let message = NSLocalizedString("The media isn't playable or it contains protected content.",
+																			comment: "You can't use this AVAsset because it isn't playable or it contains protected content.")
+			self.handleErrorWithMessage(message)
+			return false
+		}
+		
+		return true
+	}
+	
+	func handleErrorWithMessage(_ message: String, error: Error? = nil) {
+		if let err = error {
+			print("Error occurred with message: \(message), error: \(err).")
+		}
+		let alertTitle = NSLocalizedString("Error", comment: "Alert title for errors")
+		
+		let alert = UIAlertController(title: alertTitle, message: message,
+																	preferredStyle: UIAlertController.Style.alert)
+		let alertActionTitle = NSLocalizedString("OK", comment: "OK on error alert")
+		let alertAction = UIAlertAction(title: alertActionTitle, style: .default, handler: nil)
+		alert.addAction(alertAction)
+		self.superview?.inputViewController!.present(alert, animated: true, completion: nil)
+	}
+	
+	// MARK: - Playlist System
+
 	func playTrack() {
 		if playerItems.count > 0 {
 			player!.replaceCurrentItem(with: playerItems[currentTrack])
