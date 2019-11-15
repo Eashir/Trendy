@@ -20,8 +20,14 @@ class HomeViewController: UIViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(false)
+		super.viewWillAppear(animated)
+		self.navigationController?.setNavigationBarHidden(true, animated: animated)
 		homeViewModel = HomeViewModel(tableView: tableView, navigationController: self.navigationController!)
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		self.navigationController?.setNavigationBarHidden(false, animated: animated)
 	}
 	
 }

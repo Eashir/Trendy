@@ -12,7 +12,7 @@ class HomeViewModel: NSObject {
 	
 	var videos = [Video]()
 	let VideoCellReuseIdentifier = "VideoCell"
-	let videoPlayerFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+	let fullscreenPlayerFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 	private var tableView: UITableView
 	private var navigationController: UINavigationController
 	
@@ -61,17 +61,14 @@ extension HomeViewModel: UITableViewDataSource, UITableViewDelegate {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoCellReuseIdentifier, for: indexPath) as? VideoTableViewCell else {
 			return VideoTableViewCell()
 		}
-		let video = videos[indexPath.row]
+		var video = videos[indexPath.row]
+		if indexPath.row == 1 {
+			video.url = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
+		}
 		cell.setupCell(video: video)
+		cell.tableSuperView = self.tableView.superview
+		cell.videos = videos
 		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let videoVC = storyboard.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
-		let videoLauncher = VideoLauncher(view: videoVC.view, playerView: VideoPlayerView(videos: videos, frame: videoPlayerFrame))
-		videoLauncher.showVideoPlayer()
-		self.navigationController.pushViewController(videoVC, animated: true)
 	}
 	
 }

@@ -38,7 +38,8 @@ public enum NetworkRouter: URLRequestConvertible {
 				[
 					"part": "snippet, contentDetails",
 					"key": "\(authorizationKey)",
-					"chart": "mostPopular"
+					"chart": "mostPopular",
+					"maxResults": "10"
 				]
 		}
 	}

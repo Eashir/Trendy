@@ -28,6 +28,7 @@ class VideoPlayerView: UIView {
 	// MARK: - Properties
 	
 	var player: AVPlayer?
+	var playerLayer: AVPlayerLayer?
 	var playerItems = [AVPlayerItem]()
 	var currentTrack = 0
 	var videos: [Video]
@@ -42,6 +43,17 @@ class VideoPlayerView: UIView {
 		button.tintColor = .white
 		button.isHidden = true
 		button.addTarget(self, action: #selector(pausePressed), for: .touchUpInside)
+		return button
+	}()
+	
+	lazy var cancelButton: UIButton = {
+		let button = UIButton(type: .system)
+		let image = UIImage(named: "cancel")
+		button.setImage(image, for: .normal)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		button.tintColor = .white
+//		button.isHidden = true
+		button.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
 		return button
 	}()
 	
@@ -86,6 +98,10 @@ class VideoPlayerView: UIView {
 	}
 	
 	func setupViews() {
+		if let validStatusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+			validStatusBar.isHidden = true
+		}
+		
 		controlsContainerView.frame = frame
 		addSubview(controlsContainerView)
 	
@@ -94,6 +110,12 @@ class VideoPlayerView: UIView {
 		pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 		pausePlayButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
 		pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+		
+		controlsContainerView.addSubview(cancelButton)
+		cancelButton.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+		cancelButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
+		cancelButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+		cancelButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
 		
 		controlsContainerView.addSubview(videoLengthLabel)
 		videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
@@ -112,24 +134,31 @@ class VideoPlayerView: UIView {
 	
 	private func addAllVideosToPlayer() {
 		
+		//Add first cell video
 		if let url = URL(string: videos[0].url) {
 			player = AVPlayer(url: url)
 			let asset = AVURLAsset(url: url)
 			let item = AVPlayerItem(asset: asset)
 			playerItems.append(item)
-			let playerLayer = AVPlayerLayer(player: player)
-			self.layer.addSublayer(playerLayer)
-			playerLayer.frame = self.frame
+			playerLayer = AVPlayerLayer(player: player)
+			self.layer.addSublayer(playerLayer!)
+			playerLayer!.frame = self.frame
 			player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
 			player?.play()
 		}
 		
-		for i in 1...videos.count - 1 {
-			let asset = AVURLAsset(url: URL(string: videos[i].url)!)
-			let item = AVPlayerItem(asset: asset)
-			playerItems.append(item)
+		//Add rest of the videos
+		if videos.count > 1 {
+			for i in 1...videos.count - 1 {
+				guard let validURL = URL(string: videos[i].url) else {
+					continue
+				}
+				let asset = AVURLAsset(url: validURL)
+				let item = AVPlayerItem(asset: asset)
+				playerItems.append(item)
+			}
+
 		}
-		
 	}
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -201,6 +230,10 @@ class VideoPlayerView: UIView {
 		isPlaying = !isPlaying
 	}
 	
+	@objc func cancelPressed() {
+		self.removeFromSuperview()
+	}
+	
 	// MARK - Gestures
 	
 	func addGestureRecognizers() {
@@ -230,6 +263,10 @@ class VideoLauncher: NSObject {
 	func showVideoPlayer() {
 		view.backgroundColor = UIColor.white
 		view.addSubview(playerView)
+	}
+	
+	func removePlayer() {
+		playerView.removeFromSuperview()
 	}
 	
 }
