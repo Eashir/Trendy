@@ -11,14 +11,15 @@ import XCTest
 
 class TrendyTests: XCTestCase {
 	
-		var videoPlaylist: VideoPlaylistView?
+//		var videoPlaylist: VideoPlaylistView?
+		var allVideos: [Video]?
 	
     override func setUp() {
-			videoPlaylist = VideoPlaylistView(videos: [Video]())
+//			videoPlaylist = VideoPlaylistView(videos: [Video]())
     }
 
     override func tearDown() {
-			videoPlaylist = nil
+//			videoPlaylist = nil
     }
 
     func testData() {
@@ -30,7 +31,7 @@ class TrendyTests: XCTestCase {
 	
 		func testVideoPLaylist() {
 //			XCTAssertNotNil(videoPlaylist)
-			XCTAssertNotNil(videoPlaylist?.player)
+//			XCTAssertNotNil(videoPlaylist?.player)
 
 //			XCTAssertNotNil(videoPlaylist?.playerItems)
 		}

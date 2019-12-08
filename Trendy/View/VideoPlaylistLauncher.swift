@@ -160,23 +160,23 @@ class VideoPlayerView: UIView {
 		self.cancelButton.isHidden = true
 	}
 	
-	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-	
-		if keyPath == "currentItem.loadedTimeRanges" {
-			controlsContainerView.backgroundColor = .clear
-			pausePlayButton.isHidden = false
-			isPlaying = true
-			
-			let duration = playerItems[currentTrack].duration
-			let seconds = CMTimeGetSeconds(duration)
-			if seconds > 0 {
-				let secondsText = Int(seconds) % 60
-				let minutesText = String(format: "%02d", Int(seconds) / 60)
-				videoLengthLabel.text = "\(minutesText):\(secondsText)"
-			}
-		}
-		
-	}
+//	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//	
+//		if keyPath == "currentItem.loadedTimeRanges" {
+//			controlsContainerView.backgroundColor = .clear
+//			pausePlayButton.isHidden = false
+//			isPlaying = true
+//
+//			let duration = playerItems[currentTrack].duration
+//			let seconds = CMTimeGetSeconds(duration)
+//			if seconds > 0 {
+//				let secondsText = Int(seconds) % 60
+//				let minutesText = String(format: "%02d", Int(seconds) / 60)
+//				videoLengthLabel.text = "\(minutesText):\(secondsText)"
+//			}
+//		}
+//		
+//	}
 	
 	// MARK: - Asset Property Handling
 	
@@ -237,7 +237,6 @@ class VideoPlayerView: UIView {
 		let alertActionTitle = NSLocalizedString("OK", comment: "OK on error alert")
 		let alertAction = UIAlertAction(title: alertActionTitle, style: .default, handler: nil)
 		alert.addAction(alertAction)
-		self.superview?.inputViewController!.present(alert, animated: true, completion: nil)
 	}
 	
 	// MARK: - Playlist System

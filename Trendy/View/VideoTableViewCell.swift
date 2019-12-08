@@ -53,30 +53,27 @@ class VideoTableViewCell: UITableViewCell {
 		durationLabel.text = validDurationStr
 		
 		let frame = thumbnailImageView.layer.frame
-		videoPlayerView = VideoPlayerView(videos: [video], frame: frame)
-		let videoLauncher = VideoLauncher(view: self.thumbnailImageView , playerView: videoPlayerView!)
-		videoPlayerView!.hideUIForCell()
-		videoLauncher.showVideoPlayer()
-		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.cellTapped))
-		self.addGestureRecognizer(tapGestureRecognizer)
+		let webView = WKWebView(frame: frame)
+
+		webView.load(URLRequest(url: URL(string: "https://www.youtube.com/embed/\(video.id)")!))
+		self.contentView.addSubview(webView)
 	}
 	
 	@objc func cellTapped() {
-		self.contentView.layoutIfNeeded()
-		guard let validPlayerView = videoPlayerView else {return}
-		validPlayerView.frame = fullscreenFrame
-		if let validPlayerLayer = validPlayerView.playerLayer {
-			validPlayerLayer.frame = fullscreenFrame
-		}
-		
-		
-		UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-			self.contentView.layoutIfNeeded()
-		})
-		let videoLauncher = VideoLauncher(view: tableSuperView!, playerView: validPlayerView)
-		videoLauncher.playerView.cancelButton.isHidden = false
-		videoLauncher.showVideoPlayer()
-		validPlayerView.playTrack()
+//		self.contentView.layoutIfNeeded()
+//		guard let validPlayerView = videoPlayerView else {return}
+//		validPlayerView.frame = fullscreenFrame
+//		if let validPlayerLayer = validPlayerView.playerLayer {
+//			validPlayerLayer.frame = fullscreenFrame
+//		}
+//
+//		UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//			self.contentView.layoutIfNeeded()
+//		})
+//		let videoLauncher = VideoLauncher(view: tableSuperView!, playerView: validPlayerView)
+//		videoLauncher.playerView.cancelButton.isHidden = false
+//		videoLauncher.showVideoPlayer()
+//		validPlayerView.playTrack()
 	}
 	
 	
